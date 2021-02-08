@@ -30,7 +30,11 @@ const promptUser = () => {
     ]);
 };
 
-const promptProject = () => {
+const promptProject = portfolioData => {
+    if (!portfolioData.projects) {
+        portfolioData.projects = [];
+    }
+    
     console.log(`
 =================
 Add a New Project
@@ -70,10 +74,18 @@ Add a New Project
             message: 'Would you like to enter another project?',
             default: false
         }
-    ])
-}
+    ]).then(projectData => {
+        portfolioData.projects.push(projectData);
+        if (projectData.confirmAddProject) {
+            return promptProject(portfolioData);
+        } else {
+            return portfolioData;
+        }
+    });
+};
 
 promptUser()
-    .then(answers => console.log(answers))
     .then(promptProject)
-    .then(projectAnswers => console.log(projectAnswers));
+    .then(portfolioData => {
+        console.log(portfolioData);
+    });
