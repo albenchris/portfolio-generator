@@ -17,6 +17,7 @@ const generateProjects = projectsArr => {
             <section class="my-3" id="portfolio">
                 <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
                 <div class="flex-row justify-space-between">
+                <!-- featured projects -->
                 ${projectsArr
                     .filter(({ feature }) => feature)
                     .map(({ name, description, languages, link }) => {
@@ -34,6 +35,7 @@ const generateProjects = projectsArr => {
                     })
                 .join('')}
 
+                <!-- non-featured projects -->
                 ${projectsArr
                     .filter(({ feature }) => !feature)
                     .map(({ name, description, languages, link }) => {
